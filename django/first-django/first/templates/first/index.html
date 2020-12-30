@@ -1,11 +1,6 @@
+{% extends 'first/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Index Page</title>
-</head>
-<body>
+{% block content %}
     <p>Hello World!</p>
     <img src="{% static 'first/mask.png' %}" alt="마스크" title="마스크" />
     <p>현재 시간: {{ current_date }}</p>
@@ -13,5 +8,4 @@
 
     <a href="{% url 'select' %}">시작하기!</a>
     <!-- <a href="/select/">시작하기!</a> -->
-</body>
-</html>
+{% endblock %}

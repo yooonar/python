@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>Select Page</title>
-</head>
-<body>
-    <p>
-        {{ number }} 는
-        {% if number|divisibleby:2 %}
-        짝수입니다.
-        {% else %}
-        홀수입니다.
-        {% endif %}
-    </p>
-    <p>
-        <a href="{% url 'result' %}"><button>결과 보기</button></a>
-    </p>
-</body>
-</html>
+{% extends 'first/base.html' %}
+{% block content %}
+<p>수를 하나 입력해주세요.</p>
+<form action="{% url 'result' %}" method="get">
+    <input type="number" name="number" />
+    <button type="submit">결과 보기</button>
+</form>
+{% endblock %}
