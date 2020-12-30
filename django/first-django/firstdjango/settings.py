@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 # 프로젝트 전체에 관한 설정 - startproject 명령어로 생성된 파일(명령어: `django-admin startproject firstdjango .`)
 # 프로젝트를 위한 각종 설정들
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -123,3 +123,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# static 파일 경로 정의
+STATICFILES_DIRS = [
+    # 각 웹 앱의 하위에 있는 static 폴더. 이 안에 있는 파일들을 읽어온다.
+    os.path.join(BASE_DIR, "static")
+]

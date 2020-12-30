@@ -1,11 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Index Page</title>
 </head>
 <body>
     <p>Hello World!</p>
+    <img src="{% static 'mask.png' %}" alt="마스크" title="마스크" />
     <p>현재 시간: {{ current_date }}</p>
     <p>현재 시간: {{ current_date | date:"Y-m-d H:i:s" }}</p>
 
