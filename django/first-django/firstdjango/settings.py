@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'first', # 장고에서 templates 를 읽을 수 있음
 ]
 
 MIDDLEWARE = [
@@ -107,7 +108,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
+# UTC : 우리나라 시간에서 -9
+# Asia/Seoul : 우리나라 시간
 
 USE_I18N = True
 
