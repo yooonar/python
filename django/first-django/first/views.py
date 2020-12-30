@@ -8,3 +8,13 @@ from django.http import HttpResponse
 # view 파일에서는 기본적으로 index 를 정의하면 request(object) 를 받을 수 있다.
 def index(request):
     return HttpResponse("Hello World~!")
+
+
+def select(request):
+    message = "수 하나를 입력해주세요."
+    return HttpResponse(message)
+
+
+def result(request):
+    message = "추첨 결과입니다."
+    return HttpResponse(message)
