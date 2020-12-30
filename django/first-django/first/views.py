@@ -13,6 +13,8 @@ from django.template import loader
 # 시간 출력
 from datetime import datetime
 
+import random
+
 
 # Create your views here.
 # view 파일에서는 기본적으로 index 를 정의하면 request(object) 를 받을 수 있다.
@@ -47,8 +49,30 @@ def select(request):
 
 def result(request):
     message = "추첨 결과입니다."
+    # 사용자 입력 값 <- get 으로 넘어온 number 값은 str 형식이기 때문에 int 형식으로 변환해준다.(범위 비교해야해서)
+    chosen = int(request.GET['number'])
+
+    results = []
+    # 입력받은 number 값 필수로 넣기
+    if chosen >= 1 and chosen <= 45:
+        results.append(chosen)
+
+    # 0 ~ 45 사이의 난수를 box 배열에 넣기
+    box = []
+    for i in range(0, 45):
+        # 사용자가 입력한 값은 넣지 않는 조건 추가
+        if chosen != i + 1:
+            box.append(i + 1)
+
+    # 배열 섞기
+    random.shuffle(box)
+
+    # box 에서 하나씩 꺼내기
+    while len(results) < 6:
+        results.append(box.pop())
+
     context = {
-        'numbers': [1, 2, 3, 4, 5, 6],
+        'numbers': results,
     }
 
     # return HttpResponse(message)
