@@ -7,6 +7,15 @@ firstdjango 폴더 안에 있는 urls.py 에 각 url 설정을 저장하면,
 
 urlpatterns 을 통해 path 를 정의하면 아래와 같은 형식으로 읽어들인다.
 path('select/', views.select, name="select"), -> http(s)://<사이트 도메인>/<웹 앱>/select
+
+- url 중간에 parameter 를 입력받고 싶은 경우
+형식: abc.com/select/123/reviews
+문법: path('select/<int:year>/reviews', ~~, ~~)
+
+- 정규식 문법을 이용하는 경우 (re_path import 필요!)
+형식: /select/2019/
+from django.urls import re_path
+문법: re_path(r'^select/(?P<year>[0-9]{4}/$)') <- 숫자 4자리, / 로 끝남
 """
 
 from django.urls import path
