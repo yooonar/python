@@ -47,7 +47,9 @@ def select(request):
 
 def result(request):
     message = "추첨 결과입니다."
-    context = {}
+    context = {
+        'numbers': [1, 2, 3, 4, 5, 6],
+    }
 
     # return HttpResponse(message)
     return render(request, 'result.html', context)
