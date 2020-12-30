@@ -32,7 +32,7 @@ def index(request):
     # template.render(context, request) <- 템플릿 렌더링
     # django.shortcuts 으로 선언 생략 가능
     # return HttpResponse(template.render(context, request))
-    return render(request, 'index.html', context)
+    return render(request, 'first/index.html', context)
 
 
 def select(request):
@@ -42,7 +42,7 @@ def select(request):
     }
 
     # return HttpResponse(message)
-    return render(request, 'select.html', context)
+    return render(request, 'first/select.html', context)
 
 
 def result(request):
@@ -52,4 +52,4 @@ def result(request):
     }
 
     # return HttpResponse(message)
-    return render(request, 'result.html', context)
+    return render(request, 'first/result.html', context)
