@@ -25,6 +25,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="index"),
+    # name="select" 으로 선언하면 뷰 페이지에서 {% url 'select' %} 와 같은 형식으로 사용 가능하다.
     path('select/', views.select, name="select"),
     path('result/', views.result, name="result"),
 ]
