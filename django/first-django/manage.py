@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+# 장고 앱을 관리하기 위해 각종 명령어를 내장하고 있는 스크립트
 import os
 import sys
 
