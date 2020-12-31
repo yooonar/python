@@ -26,6 +26,9 @@ urlpatterns = [
     # 프로젝트 공통 url 설정
     # path('', views.index, name='index'), # 인덱스 페이지에서는 views.py > index() 메소드가 제공하는 응답 값으로 제공하겠다.
 
-    # 각 웹 앱 별 url 설정 파일 include
-    path('', include('first.urls')),
+    # 각 웹 앱 별 url 설정 파일 include - first 웹 앱
+    path('first/', include('first.urls')),
+
+    # 각 웹 앱 별 url 설정 파일 include - second 웹 앱
+    path('second/', include('second.urls')),
 ]
