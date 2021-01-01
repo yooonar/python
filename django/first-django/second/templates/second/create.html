@@ -1,0 +1,8 @@
+<form action="/" method="post">
+    <!-- 토큰을 발급해 유효성 체크  -->
+    {% csrf_token %}
+
+    <!-- 뷰에서 전달받은 폼 출력. 장고 내부에서 html 소스로 변환해줌 -->
+    {{ form }}
+    <button type="submit">제출</button>
+</form>
