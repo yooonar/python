@@ -2,7 +2,12 @@
     <!-- 토큰을 발급해 유효성 체크  -->
     {% csrf_token %}
 
+    <!-- 테이블 형식으로 폼 가져오기 -->
+    <table>
+        {{ form.as_table }}
+    </table>
+
     <!-- 뷰에서 전달받은 폼 출력. 장고 내부에서 html 소스로 변환해줌 -->
-    {{ form }}
+    <!-- {{ form }} -->
     <button type="submit">제출</button>
 </form>
