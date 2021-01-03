@@ -19,6 +19,16 @@ def list(request):
 
 
 def create(request):
+    # POST 전송인 경우 유효성 체크
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            # 레코드를 생성하는 코드가 필요함
+            print(form)
+        # 유효성 체크가 안된 경우 목록 페이지로 이동시킴
+        return HttpResponseRedirect('/second/list/')
+
+    # GET 전송인 경우 폼 양식과 함께 create 페이지가 노출됨
     form = PostForm()
     return render(request, 'second/create.html', {'form': form})
 
