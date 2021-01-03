@@ -4,7 +4,7 @@ from django.db import models
 
 # 게시글 남기는 웹 앱
 # 장고 모델(models.Model)을 상속받는 Post 클래스 정의
-class Post(models.Model) :
+class Post(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
 
