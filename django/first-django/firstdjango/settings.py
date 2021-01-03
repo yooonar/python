@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'first', # 장고에서 templates 를 읽을 수 있음
     'second', # 장고에서 templates 를 읽을 수 있음
+    'third', # 장고에서 templates 를 읽을 수 있음
 ]
 
 MIDDLEWARE = [

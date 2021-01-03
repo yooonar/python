@@ -31,4 +31,8 @@ urlpatterns = [
 
     # 각 웹 앱 별 url 설정 파일 include - second 웹 앱
     path('second/', include('second.urls')),
+
+    # 각 웹 앱 별 url 설정 파일 include - third 웹 앱
+    path('third/', include('third.urls')),
+
 ]
