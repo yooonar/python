@@ -23,8 +23,8 @@ def create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            # 레코드를 생성하는 코드가 필요함
-            print(form)
+            # 폼 데이터가 모델 스키마에 연결되면서 자동 저장됨
+            new_item = form.save()
         # 유효성 체크가 안된 경우 목록 페이지로 이동시킴
         return HttpResponseRedirect('/second/list/')
 
