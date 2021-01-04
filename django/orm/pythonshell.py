@@ -2,6 +2,7 @@
 
 1. 웹 앱 생성
 명령어: python manage.py makemigrations
+
 ===========================================
 ~/Documents/study/python/django/first-django main*
 venv ❯ python manage.py makemigrations
@@ -12,6 +13,7 @@ Migrations for 'third':
 
 
 2. 1번으로 만든 웹 앱(third)의 third/models.py 파일에서 모델 구현
+
 ===========================================
 from django.db import models
 
