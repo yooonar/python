@@ -70,3 +70,50 @@ Running migrations:
 
 
 """
+
+
+"""파이썬 쉘로 진입하여 임시 데이터 입력
+
+1. 파이썬 쉘 접근
+명령어: python manage.py shell
+
+===========================================
+~/Documents/study/python/django/first-django main* ⇡
+venv ❯ python manage.py shell
+Python 3.7.2 (v3.7.2:9a3ffc0492, Dec 24 2018, 02:44:43)
+[Clang 6.0 (clang-600.0.57)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+===========================================
+
+
+2. 모델 import 하기
+쉘을 닫았다 다시 열 때마다 초기화 되기 때문에 쉘을 열 때마다 import 해준다.
+명령어: from 웹앱명.models import 모델클래스명
+
+===========================================
+>>> from third.models import Restaurant
+>>>
+===========================================
+
+
+3. 임시 데이터 입력하기
+데이터 입력해줌
+명령어: 모델클래스명(컬럼명="정보").save()
+
+===========================================
+>>> Restaurant(name="Deli Shop", address="Gangnam").save()
+>>> Restaurant(name="Korean food", address="Gangbuk").save()
+>>> Restaurant(name="Sushi", address="Gangbuk").save()
+===========================================
+
+
+4. 3번에서 저장한 데이터(이하 object) 전체 정보 가져오기
+명령어: object명.objects.all()
+===========================================
+>>> Restaurant.objects.all()
+<QuerySet [<Restaurant: Restaurant object (1)>, <Restaurant: Restaurant object (2)>, <Restaurant: Restaurant object (3)>]>
+===========================================
+
+"""
