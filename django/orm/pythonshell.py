@@ -111,6 +111,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 4. 3번에서 저장한 데이터(이하 object) 전체 정보 가져오기
 명령어: object명.objects.all()
+
 ===========================================
 >>> Restaurant.objects.all()
 <QuerySet [<Restaurant: Restaurant object (1)>, <Restaurant: Restaurant object (2)>, <Restaurant: Restaurant object (3)>]>
