@@ -118,3 +118,45 @@ Type "help", "copyright", "credits" or "license" for more information.
 ===========================================
 
 """
+
+"""파이썬 쉘로 데이터 조회, 필터링
+
+1. 전체 정보 가져오기
+명령어: object명.objects.all()
+
+===========================================
+>>> Restaurant.objects.all()
+<QuerySet [<Restaurant: Restaurant object (1)>, <Restaurant: Restaurant object (2)>, <Restaurant: Restaurant object (3)>]>
+===========================================
+
+
+2. get 명령어로 특정 조건의 정보만 가져오기
+리턴 타입은 String, Int 등이다.
+명령어: object명.objects.get(조건).컬럼명
+
+===========================================
+>>> Restaurant.objects.get(pk=1).name
+'Deli Shop'
+===========================================
+
+
+3. filter 명령어로 특정 조건의 값 가져오기
+리턴 타입은 QuerySet 이다.
+명령어: object명.objects.filter(조건=값).values()
+
+===========================================
+>>> Restaurant.objects.filter(name='Deli Shop').values()
+<QuerySet [{'id': 1, 'name': 'Deli Shop', 'address': 'Gangnam', 'create_at': datetime.datetime(2021, 1, 3, 12, 55, 54, 118109, tzinfo=<UTC>), 'update_at': datetime.datetime(2021, 1, 3, 12, 55, 54, 118162, tzinfo=<UTC>)}]>
+===========================================
+
+
+4. exclude 명령어로 특정 조건을 제외한 값 가져오기
+리턴 타입은 QuerySet 이다.
+명령어: object명.objects.exclude(조건=값).values()
+
+===========================================
+>>> Restaurant.objects.exclude(name='Deli Shop').values()
+<QuerySet [{'id': 2, 'name': 'Korean food', 'address': 'Gangbuk', 'create_at': datetime.datetime(2021, 1, 3, 12, 56, 10, 915980, tzinfo=<UTC>), 'update_at': datetime.datetime(2021, 1, 3, 12, 56, 10, 916014, tzinfo=<UTC>)}, {'id': 3, 'name': 'Sushi', 'address': 'Gangbuk', 'create_at': datetime.datetime(2021, 1, 3, 12, 56, 29, 773010, tzinfo=<UTC>), 'update_at': datetime.datetime(2021, 1, 3, 12, 56, 29, 773048, tzinfo=<UTC>)}]>
+===========================================
+
+"""
