@@ -160,3 +160,47 @@ Type "help", "copyright", "credits" or "license" for more information.
 ===========================================
 
 """
+
+
+"""파이썬 쉘로 페이징, 정렬하기
+
+1. 페이징하기(0 ~ 9까지의 데이터 가져오기)
+0번지부터 10번지 전(9번지)까지 가져오기
+명령어: object명.objects.all()[페이징시작값:페이징끝값]
+
+===========================================
+>>> Restaurant.objects.all()[0:10]
+<QuerySet [<Restaurant: Restaurant object (1)>, <Restaurant: Restaurant object (2)>, <Restaurant: Restaurant object (3)>]>
+===========================================
+
+
+2. 생성순으로 정렬하기
+생성일 오름차순으로 정렬하기
+명령어: object명.objects.order_by('날짜컬럼명')
+
+===========================================
+>>> Restaurant.objects.order_by('create_at')
+<QuerySet [<Restaurant: Restaurant object (1)>, <Restaurant: Restaurant object (2)>, <Restaurant: Restaurant object (3)>]>
+===========================================
+
+
+3. 최신순으로 정렬하기
+생성일 내림차순으로 정렬하기
+명령어: obejct명.objects.order_by('-날짜컬럼명')
+
+===========================================
+>>> Restaurant.objects.order_by('-create_at')
+<QuerySet [<Restaurant: Restaurant object (3)>, <Restaurant: Restaurant object (2)>, <Restaurant: Restaurant object (1)>]>
+===========================================
+
+
+4. 최신순 정렬 후 페이징한 정보 가져오기
+쉘로 입력한 데이터가 별로 없어 3개의 데이터만 가져온다.
+명령어: object명.objects.order_by('날짜컬럼명')[페이징시작값:페이징끝값].values()
+
+===========================================
+>>> Restaurant.objects.order_by('-create_at')[1:3].values()
+<QuerySet [{'id': 2, 'name': 'Korean food', 'address': 'Gangbuk', 'create_at': datetime.datetime(2021, 1, 3, 12, 56, 10, 915980, tzinfo=<UTC>), 'update_at': datetime.datetime(2021, 1, 3, 12, 56, 10, 916014, tzinfo=<UTC>)}, {'id': 1, 'name': 'Deli Shop', 'address': 'Gangnam', 'create_at': datetime.datetime(2021, 1, 3, 12, 55, 54, 118109, tzinfo=<UTC>), 'update_at': datetime.datetime(2021, 1, 3, 12, 55, 54, 118162, tzinfo=<UTC>)}]>
+===========================================
+
+"""
