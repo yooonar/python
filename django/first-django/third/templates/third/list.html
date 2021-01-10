@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Third List</title>
-</head>
-<body>
-{% for item in restaurants %}
-    <div>
+{% extends 'third/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    {% for item in restaurants %}
+    <div class="row restaurant-item" style="margin:20px auto;">
         <h4>{{ item.name }}</h4>
         <p>{{ item.address }}</p>
     </div>
-{% endfor %}
-</body>
-</html>
+    {% endfor %}
+</div>
+{% endblock %}
