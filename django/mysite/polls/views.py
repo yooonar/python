@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from .models import Question
 from django.template import loader
@@ -34,10 +34,15 @@ def index(request):
 def detail(request, question_id):
     # 1. HttpResponse를 이용한 방법
     # return HttpResponse('You\'re looking at question %s.' % question_id)
-    try:
-        question = Question.objects.get(pk=question_id)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exist!")
+
+    # 1) try, except를 이용해 404 페이지 예외 처리
+    # try:
+    #     question = Question.objects.get(pk=question_id)
+    # except Question.DoesNotExist:
+    #     raise Http404("Question does not exist!")
+
+    # 2) 숏컷에 있는 get_object_or_404를 이용해 404 페이지 예외 처리
+    question = get_object_or_404(Question, pk=question_id)
     # 2. render를 이용한 방법
     return render(request, 'polls/detail.html', {'question': question})
 
