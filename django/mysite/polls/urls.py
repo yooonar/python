@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+# 템플릿에서 구분지을 수 있도록 앱 이름을 지정함
+app_name = 'polls'
+
 urlpatterns = [
     # 메인 페이지 /polls/
     path('', views.index, name='index'),
