@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Question
 
 
 # Create your views here.
 def index(request):
-    return HttpResponse('Hello, World!')
+    # 일자를 기준으로 5개까지만 가져옴
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # 투표 질문 리스트를 콤마로 구분하여 보여줌
+    # What's your favorite food to eat?, What's new? 이런 식으로!
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
 
 
 def detail(request, question_id):
