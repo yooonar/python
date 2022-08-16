@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'polls.apps.PollsConfig',  # polls 웹앱 설정을 추가함 (polls/app.py에 PollsConfig 클래스가 있음)
 ]
 
 MIDDLEWARE = [
