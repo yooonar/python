@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Question
 from django.template import loader
 
@@ -14,7 +14,7 @@ def index(request):
     # 투표 질문 리스트를 콤마로 구분하여 보여줌
     # What's your favorite food to eat?, What's new? 이런 식으로!
     output = ', '.join([q.question_text for q in latest_question_list])
-    
+
     return HttpResponse(output)
     '''
 
@@ -32,7 +32,14 @@ def index(request):
 
 
 def detail(request, question_id):
-    return HttpResponse('You\'re looking at question %s.' % question_id)
+    # 1. HttpResponse를 이용한 방법
+    # return HttpResponse('You\'re looking at question %s.' % question_id)
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist!")
+    # 2. render를 이용한 방법
+    return render(request, 'polls/detail.html', {'question': question})
 
 
 def results(request, question_id):
