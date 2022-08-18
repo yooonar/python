@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from polls import views
 
 urlpatterns = [
+    path('', views.index, name='index'),  # 메인 페이지 진입 시 polls/index를 바라보도록 조치
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),  # 최상위 mysite 프로젝트의 urls에 polls 웹앱의 urls를 참조하도록 추가
 ]
