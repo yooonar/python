@@ -1,10 +1,31 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect  # , Http404
+from django.http import HttpResponseRedirect  # , HttpResponse, Http404
 from .models import Question, Choice
 from django.urls import reverse
+from django.views import generic  # generic view 사용
 from django.template import loader
 
 
+class IndexView(generic.ListView):
+    template_name = 'polls/index.html'
+    context_object_name = 'latest_question_list'
+
+    def get_queryset(self):
+        """ Return the last five published questions. """
+        return Question.objects.order_by('-pub_date')[:5]
+
+
+class DetailView(generic.DetailView):
+    model = Question
+    template_name = 'polls/detail.html'
+
+
+class ResultsView(generic.DetailView):
+    model = Question
+    template_name = 'polls/results.html'
+
+
+"""
 # Create your views here.
 def index(request):
     # 일자를 기준으로 5개까지만 가져옴
@@ -55,31 +76,34 @@ def results(request, question_id):
     # 넘겨받은 question_id를 통해 question 데이터 조회
     question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
+"""
 
 
 def vote(request, question_id):
     # question_id 를 넘겨받아 데이터를 조회
-    question = get_object_or_404(Question, pk=question_id)
+    if request.method == 'GET':
+        pass
+    elif request.method == 'POST':
+        question = get_object_or_404(Question, pk=question_id)
+        try:
+            # question에 대해 외래키를 갖는 선택지를 가져온다.
+            # request.POST['choice_id'] = 템플릿에서 넘겨받은 input 값의 이름
+            selected_choice = question.choice_set.get(pk=request.POST['choice'])
 
-    try:
-        # question에 대해 외래키를 갖는 선택지를 가져온다.
-        # request.POST['choice_id'] = 템플릿에서 넘겨받은 input 값의 이름
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+        # selected_choice 가 없는 경우 except 문을 탐
+        except(KeyError, Choice.DoesNotExist):
+            # Redisplay the question voting form.
+            return render(request, 'polls/detail.html', {
+                'question': question,
+                'error_message': "You didn't select a choice.",
+            })
 
-    # selected_choice 가 없는 경우 except 문을 탐
-    except(KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'polls/detail.html', {
-          'question': question,
-          'error_message': "You didn't select a choice.",
-        })
+        # selected_choice 가 있는 경우 아래를 실행
+        else:
+            selected_choice.votes += 1
+            selected_choice.save()
 
-    # selected_choice 가 있는 경우 아래를 실행
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-
-        # post로 호출된 경우는 HttpResponseRedirect 로 페이지 이동
-        # reverse 는 페이지 이동할 때 하드코딩 하지 않고 이동할 수 있도록 사용한 것
-        return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
-    # return HttpResponse('You\'re voting on question %s.' % question_id)
+            # post로 호출된 경우는 HttpResponseRedirect 로 페이지 이동
+            # reverse 는 페이지 이동할 때 하드코딩 하지 않고 이동할 수 있도록 사용한 것
+            return HttpResponseRedirect(reverse('polls:results', args=(question_id,)))
+        # return HttpResponse('You\'re voting on question %s.' % question_id)
