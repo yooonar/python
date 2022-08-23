@@ -8,6 +8,25 @@ from .models import Question
 # 테스트 파일명은 test.py, 함수 이름은 test_ 로 시작해야 함
 # Create your tests here.
 class QuestionModelTests(TestCase):
+
+    # 1일이 넘어갈 때에 대한 결과값이 False가 나와야 함
+    def test_was_published_recently_with_old_question(self):
+        """
+        was_published_recently() returns False for questions whose pub_date is older than 1 day.
+        """
+        time = timezone.now() - datetime.timedelta(days=1, seconds=1)
+        old_question = Question(pub_date=time)
+        self.assertIs(old_question.was_published_recently(), False)
+
+    # 1일이 넘어가지 않았을 때에 대한 결과값이 True가 나와야 함
+    def test_was_published_recently_with_recent_question(self):
+        """
+        was_published_recently() returns True for questions whose pub_date is within the last day.
+        """
+        time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+        recent_question = Question(pub_date=time)
+        self.assertIs(recent_question.was_published_recently(), True)
+
     def test_was_published_recently_with_future_question(self):
         """
         was_published_recently() returns False for questions whose pub_date is in the future.
