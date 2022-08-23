@@ -13,7 +13,11 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        # self.pub_date <= now 현재 날짜가 현재 시간을 초과하지 않도록 함(미래의 데이터가 생성되지 않도록)
+        # now - datetime.timedelta(days=1) <= self.pub_date 최근 기준을 하루로 함
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+        # return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
 class Choice(models.Model):
