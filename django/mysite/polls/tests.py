@@ -122,3 +122,29 @@ class QuestionIndexViewTests(TestCase):
     OK
     Destroying test database for alias 'default'...
     """
+
+
+class QuestionDetailViewTests(TestCase):
+    def test_future_question(self):
+        future_question = create_question(question_text='Future question.', days=5)
+        url = reverse('polls:detail', args=(future_question.id, ))
+
+        # 테스트 클래스가 url을 호출
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_past_question(self):
+        past_question = create_question(question_text='Past question.', days=-5)
+        url = reverse('polls:detail', args=(past_question.id, ))
+
+        # 테스트 클래스가 url을 호출
+        response = self.client.get(url)
+        self.assertContains(response, past_question.question_text)
+
+    """
+    테스트 결과
+    Ran 10 tests in 0.019s
+    
+    OK
+    Destroying test database for alias 'default'...
+    """

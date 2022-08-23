@@ -25,6 +25,10 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
 
+    # 미래 데이터가 나오지 않도록 filter를 통해 조건을 입력
+    def get_queryset(self):
+        return Question.objects.filter(pub_date__lte=timezone.now())
+
 
 class ResultsView(generic.DetailView):
     model = Question
